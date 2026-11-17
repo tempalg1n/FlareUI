@@ -257,6 +257,11 @@ end
 function Settings:Module(def)
     assert(type(def.key) == "string", "Settings:Module needs a key")
     local module = setmetatable(def, Module)
+    -- a page whose module isn't ported to this game yet (Compat.lua) says so instead of its own banner
+    if not ns.Compat.SupportsPage(module.key) then
+        module.unavailable = true
+        module.banner = function() return L["This part of FlareUI isn't ready for this version of the game yet."] end
+    end
     module.group = module.group or "HUD"
     module.order = module.order or 100
     module.sections = {}

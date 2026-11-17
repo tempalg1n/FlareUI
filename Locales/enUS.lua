@@ -1818,6 +1818,7 @@ L["Thin Borders"] = true
 L["This character gets its own key for this radial. Your other characters keep the shared key."] = true
 L["This client does not let addons reload the UI. Type |cffffff00/reload|r to apply the change."] = true
 L["This is the one thing to remember: there are two places."] = true
+L["This part of FlareUI isn't ready for this version of the game yet."] = true
 L["This reloads your interface."] = true
 L["Those in Your Bags"] = true
 L["Threat"] = true

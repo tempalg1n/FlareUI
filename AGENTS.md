@@ -5,6 +5,7 @@ These rules apply to any change to FlareUI, whether a person or an AI tool write
 ## What FlareUI is
 
 - A World of Warcraft addon for **WoW: Forever** only (`## Interface: 16001`). Forever is not Retail and not Classic: its API and Blizzard UI code differ from both.
+- A Retail port is in progress (`## Interface: 16001, 120100`). `Compat.lua` tells the games apart and lists the modules and settings pages ready on Retail. Add a module there only after testing it in game on Retail, and never change how it behaves on Forever.
 - FlareUI improves Blizzard's own interface without replacing its look. It is split into modules that players switch on one by one.
 
 ## Keep pull requests small

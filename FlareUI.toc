@@ -1,4 +1,4 @@
-## Interface: 16001
+## Interface: 16001, 120100
 ## Title: FlareUI
 ## Version: 6.11
 ## Author: Malkkav
@@ -28,6 +28,7 @@
 # Libraries (the load check first: it needs nothing else)
 # ----------------------------------------------------
 LoadCheck.lua
+Compat.lua
 Libs\Libs.xml
 PerfTrace.lua
 

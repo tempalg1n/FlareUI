@@ -2902,9 +2902,10 @@ f:SetScript("OnEvent", function(self, event, ...)
 
         local profile = ns.db.profile
         for name, module in pairs(ns.modules) do
-            local shouldLoad = true
+            -- a module not ported to this game yet (Compat.lua) doesn't start
+            local shouldLoad = ns.Compat.SupportsModule(name)
 
-            if module.ShouldLoad then
+            if shouldLoad and module.ShouldLoad then
                 local loadCheckSuccess, loadResult = pcall(module.ShouldLoad, module)
                 if loadCheckSuccess then
                     shouldLoad = loadResult
