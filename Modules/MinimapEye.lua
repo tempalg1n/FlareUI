@@ -137,7 +137,7 @@ local function Dress()
     ground:SetSize(GROUND_SIZE, GROUND_SIZE)
     ground:SetPoint("CENTER")
     ground:SetTexture("Interface\\Minimap\\UI-Minimap-Background")
-    local eye = CreateFrame("Frame", nil, button, "LFGEyeTemplate")
+    local eye = CreateFrame("Frame", nil, button, ns.Compat.EYE_TEMPLATE)
     eye:SetScale(EYE_SCALE)
     eye:SetPoint("CENTER")
     -- the template has its own mouse scripts, and it is larger than the button: it would take the clicks

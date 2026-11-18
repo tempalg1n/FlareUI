@@ -5,12 +5,16 @@ local H = dofile("tools/tests/perf-helpers.lua")
 
 local MAINLINE = 1
 
-local function loadCompat(projectID, tocVersion)
+-- templates: the XML template names the mocked game has (C_XMLUtil.GetTemplateInfo answers for them)
+local function loadCompat(projectID, tocVersion, templates)
     local chunk = assert(loadfile("Compat.lua"))
     local env = setmetatable({
         GetBuildInfo = function() return "x", "1", "date", tocVersion end,
         WOW_PROJECT_ID = projectID,
         WOW_PROJECT_MAINLINE = MAINLINE,
+        C_XMLUtil = templates and {
+            GetTemplateInfo = function(name) return templates[name] and { type = "Frame" } or nil end,
+        },
     }, { __index = _G })
     setfenv(chunk, env)
     local ns = {}
@@ -68,4 +72,18 @@ for key in pagesBlock:gmatch("([%w_]+) = true") do
     assert(pages[key], "Compat.lua lists an unknown settings page: " .. key)
 end
 
-print("PASS: compat flavour detection and ready lists")
+-- Blizzard templates: Retail asks the game, Forever always has them (even when the game says no)
+local retailGame = loadCompat(MAINLINE, 120105, { EyeTemplate = true, BackdropTemplate = true })
+check(retailGame.HasTemplate("BackdropTemplate"), true, "Retail has a template the game knows")
+check(retailGame.HasTemplate("PetFrameHappinessTemplate"), false, "Retail lacks pet happiness")
+check(retailGame.EYE_TEMPLATE, "EyeTemplate", "Retail's queue eye template")
+local foreverGame = loadCompat(MAINLINE, 16001, { BackdropTemplate = true })
+check(foreverGame.HasTemplate("PetFrameHappinessTemplate"), true, "Forever keeps pet happiness")
+check(foreverGame.EYE_TEMPLATE, "LFGEyeTemplate", "Forever's queue eye template")
+local retailNoUtil = loadCompat(MAINLINE, 120105)
+check(retailNoUtil.HasTemplate("PetFrameHappinessTemplate"), true, "no C_XMLUtil: assume the template exists")
+
+-- every template Compat.EYE_TEMPLATE names must be one the eye code expects to pass to CreateFrame
+assert(H.read("Modules/MinimapEye.lua"):find("ns.Compat.EYE_TEMPLATE", 1, true), "MinimapEye uses Compat.EYE_TEMPLATE")
+
+print("PASS: compat flavour detection, ready lists and Blizzard templates")

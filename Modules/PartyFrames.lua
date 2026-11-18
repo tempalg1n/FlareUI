@@ -1800,6 +1800,7 @@ function PF.LayoutPetHappiness(f)
         return
     end
     if not face then
+        if not ns.Compat.HasTemplate("PetFrameHappinessTemplate") then return end   -- Retail: no pet happiness
         face = CreateFrame("Frame", nil, p, "PetFrameHappinessTemplate")
         face:SetFrameLevel(p:GetFrameLevel() + 6)
         pcall(face.SetPropagateMouseClicks, face, true)

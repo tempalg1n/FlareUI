@@ -3248,6 +3248,8 @@ end
 local HAPPINESS_PREVIEW = "UI-PetHappiness"
 
 local function CreateHappiness(f)
+    -- Retail has no pet happiness (no template): the pet frame goes without the face
+    if not ns.Compat.HasTemplate("PetFrameHappinessTemplate") then return end
     local face = CreateFrame("Frame", nil, f.Overlay, "PetFrameHappinessTemplate")
     face:Hide()
     pcall(face.SetPropagateMouseClicks, face, true)

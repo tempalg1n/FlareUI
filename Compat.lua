@@ -53,3 +53,16 @@ end
 function Compat.SupportsPage(key)
     return ready == nil or ready.pages[key] == true
 end
+
+-- Does the game have this Blizzard XML template? Retail lacks some of Forever's (pet happiness,
+-- the gamepad input icon), and CreateFrame with a missing one is an error. Forever is always yes.
+function Compat.HasTemplate(name)
+    if not Compat.isRetail then return true end
+    local util = C_XMLUtil
+    if not (util and util.GetTemplateInfo) then return true end
+    local ok, info = pcall(util.GetTemplateInfo, name)
+    return ok and info ~= nil
+end
+
+-- The queue eye's template: Forever's LFGEyeTemplate is Retail's EyeTemplate (same parts, same methods)
+Compat.EYE_TEMPLATE = Compat.isRetail and "EyeTemplate" or "LFGEyeTemplate"

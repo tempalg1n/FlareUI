@@ -3861,7 +3861,7 @@ end
 -- Gamepad UI: LB / RB icons above the header of the chat window that has the pad. Polled: a hook on
 -- Blizzard's focus calls would run addon code inside its gamepad focus manager.
 local function SetupGamepadTabHints()
-    if not ns.IsGamepadUI() then return end
+    if not ns.IsGamepadUI() or not ns.Compat.HasTemplate("InputIconTextureFrameTemplate") then return end
     local function MakeIcon(key)
         local icon = CreateFrame("Frame", nil, UIParent, "InputIconTextureFrameTemplate")
         icon:SetSize(26, 26)
