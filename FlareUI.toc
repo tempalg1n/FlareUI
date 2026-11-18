@@ -1,4 +1,4 @@
-## Interface: 16001, 120100
+## Interface: 16001, 120105
 ## Title: FlareUI
 ## Version: 6.11
 ## Author: Malkkav
