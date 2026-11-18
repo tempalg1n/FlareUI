@@ -31,8 +31,11 @@ end
 -- without a list has everything. Add a name only after testing it in game on that client.
 local READY = {
     RETAIL = {
-        modules = { Chat = true, Tooltips = true, DamageMeter = true, Visibility = true },
-        pages = { about = true, adv = true, language = true, ch = true, tt = true, dm = true },
+        -- Minimap (mm) and UnitFrames (uf): switched on for the in-game Retail test, not confirmed yet
+        modules = { Chat = true, Tooltips = true, DamageMeter = true, Visibility = true,
+            Minimap = true, UnitFrames = true },
+        pages = { about = true, adv = true, language = true, ch = true, tt = true, dm = true,
+            mm = true, uf = true },
     },
 }
 

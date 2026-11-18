@@ -36,14 +36,16 @@ local forever = loadCompat(MAINLINE, 16001)
 check(forever.isForever, true, "Forever flag")
 check(forever.SupportsModule("UnitFrames"), true, "Forever keeps Unit Frames")
 check(forever.SupportsPage("uf"), true, "Forever keeps the Unit Frames page")
+check(forever.SupportsModule("ActionBars"), true, "Forever keeps Action Bars")
+check(forever.SupportsPage("ab"), true, "Forever keeps the Action Bars page")
 
 -- Retail only what is ported
 local retail = loadCompat(MAINLINE, 120100)
 check(retail.isRetail, true, "Retail flag")
 check(retail.SupportsModule("Chat"), true, "Retail runs Chat")
-check(retail.SupportsModule("UnitFrames"), false, "Retail skips Unit Frames")
+check(retail.SupportsModule("ActionBars"), false, "Retail skips Action Bars")
 check(retail.SupportsPage("ch"), true, "Retail shows the Chat page")
-check(retail.SupportsPage("uf"), false, "Retail marks the Unit Frames page")
+check(retail.SupportsPage("ab"), false, "Retail marks the Action Bars page")
 check(retail.SupportsPage("about"), true, "Retail shows About")
 
 -- every ready name exists in the code (a typo would silently keep a module off)
